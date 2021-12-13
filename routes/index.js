@@ -12,4 +12,7 @@ router.get("/about", indexController.about);
 // CONTACT ROUTE
 router.get("/contact", indexController.contact);
 
+// CONTACT PAGE MESSAGE LOGIC
+router.post("/contact", indexController.contactPageLogic);
+
 module.exports = router;
