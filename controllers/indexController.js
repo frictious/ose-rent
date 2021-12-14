@@ -25,6 +25,27 @@ exports.about = (req, res) => {
     });
 }
 
+// HOUSES PAGE
+exports.houses = (req, res) => {
+    res.render("houses", {
+        title : "OseRent SL Houses"
+    });
+}
+
+// REQUESTS PAGE
+exports.requests = (req, res) => {
+    res.render("requests", {
+        title : "OseRent SL Customers Requests"
+    });
+}
+
+// AGENTS PAGE
+exports.agents = (req, res) => {
+    res.render("agents", {
+        title : "OseRent SL Agents"
+    });
+}
+
 // CONTACT PAGE
 exports.contact = (req, res) => {
     res.render("contact", {

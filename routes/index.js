@@ -9,6 +9,15 @@ router.get("/", indexController.index);
 // ABOUT ROUTE
 router.get("/about", indexController.about);
 
+// HOUSES ROUTE
+router.get("/houses", indexController.houses);
+
+// REQUESTS ROUTE
+router.get("/requests", indexController.requests);
+
+// AGENTS ROUTE
+router.get("/agents", indexController.agents);
+
 // CONTACT ROUTE
 router.get("/contact", indexController.contact);
 
