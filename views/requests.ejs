@@ -7,8 +7,8 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
-              <h1 class="title-single">Customers Requests</h1>
-              <!-- <span class="color-text-a">Grid News</span> -->
+              <h1 class="title-single">Requests</h1>
+              <span class="color-text-a">Make a Request</span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
@@ -28,177 +28,148 @@
     </section><!-- End Intro Single-->
 
     <!-- =======  Blog Grid ======= -->
-    <section class="news-grid grid">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img src="/images/post-1.jpg" alt="" class="img-b img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-category-b">
-                    <a href="#" class="category-b">Travel</a>
-                  </div>
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a href="blog-single.html">Travel is comming
-                        <br> new</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">18 Sep. 2017</span>
-                  </div>
+    <div class="col-sm-12  container">
+      <div class="row">
+        <div class="col-md-7">
+          <form action="/customersrequest" method="POST">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="Your Name" required>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img src="/images/post-2.jpg" alt="" class="img-b img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-category-b">
-                    <a href="blog-single.html" class="category-b">Travel</a>
-                  </div>
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a href="blog-single.html">Travel is comming
-                        <br> new</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">18 Sep. 2017</span>
-                  </div>
+              <div class="col-md-6 mb-3">
+                <div class="form-group">
+                  <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" required>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img src="/images/post-3.jpg" alt="" class="img-b img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-category-b">
-                    <a href="#" class="category-b">Travel</a>
-                  </div>
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a href="blog-single.html">Travel is comming
-                        <br> new</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">18 Sep. 2017</span>
-                  </div>
+              <div class="col-md-12 mb-3">
+                <div class="form-group form-group-lg">
+                  <!-- <label class="pb-2" for="Type">Type</label> -->
+                  <select class="form-control form-select form-control-lg" id="Type">
+                    <option disabled selected>All Type</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Sell">Sell</option>
+                    <option value="Buy">Buy</option>
+                    <option value="Lease">Lease</option>
+                  </select>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img src="/images/post-4.jpg" alt="" class="img-b img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-category-b">
-                    <a href="#" class="category-b">Travel</a>
-                  </div>
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a href="blog-single.html">Travel is comming
-                        <br> new</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">18 Sep. 2017</span>
-                  </div>
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  <input type="tel" name="phone" class="form-control form-control-lg form-control-a" placeholder="Phone Number" required>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img src="/images/post-5.jpg" alt="" class="img-b img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-category-b">
-                    <a href="#" class="category-b">Travel</a>
-                  </div>
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a href="blog-single.html">Travel is comming
-                        <br> new</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">18 Sep. 2017</span>
-                  </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <textarea name="description" class="form-control" id="request" cols="45" rows="15" placeholder="House Description" required></textarea>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-box-b card-shadow news-box">
-              <div class="img-box-b">
-                <img src="/images/post-6.jpg" alt="" class="img-b img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-header-b">
-                  <div class="card-category-b">
-                    <a href="#" class="category-b">Travel</a>
-                  </div>
-                  <div class="card-title-b">
-                    <h2 class="title-2">
-                      <a href="blog-single.html">Travel is comming
-                        <br> new</a>
-                    </h2>
-                  </div>
-                  <div class="card-date">
-                    <span class="date-b">18 Sep. 2017</span>
-                  </div>
+              <br>
+              <div class="divider"></div>
+              <!-- <div class="col-md-12 my-3">
+                <div class="mb-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
                 </div>
+              </div> -->
+
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-a">Make Request</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <nav class="pagination-a">
-              <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">
-                    <span class="bi bi-chevron-left"></span>
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item next">
-                  <a class="page-link" href="#">
-                    <span class="bi bi-chevron-right"></span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+        
+        <div class="col-md-5">
+          <div class="icon-box section-b2">
+            <div class="icon-box-icon">
+              <!-- <span class="bi bi-envelope"></span> -->
+            </div>
+            <div class="icon-box-content table-cell">
+              <div class="icon-box-title">
+                <h4 class="icon-title">How to Make Request</h4>
+              </div>
+              <div class="icon-box-content">
+                <p class="">Using the form on the left hand / top side of this page, you can simply put in a request to our agents for them to know more about the type of house(s) that you may / might be interested in.
+                  <!-- <span class="color-a">oserent62@gmail.com</span> -->
+                </p>
+                <p class="mb-1">Simply use the instruction below to fill the form with ease
+                  <!-- <span class="color-a">+232 79 151173</span> -->
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="icon-box section-b2">
+            <div class="icon-box-icon">
+              <!-- <span class="bi bi-geo-alt"></span> -->
+            </div>
+            <div class="icon-box-content table-cell">
+              <div class="icon-box-title">
+                <h4 class="icon-title">Instructions</h4>
+              </div>
+              <div class="icon-box-content">
+                <ol>
+                  <li>Enter Your name, email, and contact, so the agent can contact you once they have what you want</li><br>
+                  <li>Select the type of service you want from the dropdown menu (Rent, Buy, Sell, Lease)</li><br>
+                  <li>Enter the description of the type of house you either want to buy, sell, rent, or lease</li><br>
+                  <li>Once you're done, click the make request button to send request</li><br>
+                </ol>
+                <!-- <p class="mb-1">
+                  <-- Freetown, Sierra Leone
+                  <br> F/Town, SL ->
+                </p> -->
+              </div>
+            </div>
+          </div>
+          <div class="icon-box">
+            <div class="icon-box-icon">
+              <!-- <span class="bi bi-share"></span> -->
+            </div>
+            <div class="icon-box-content table-cell">
+              <div class="icon-box-title">
+                <h4 class="icon-title">NOTE</h4>
+              </div>
+              <div class="icon-box-content">
+                <div class="socials-footer">
+                  <p>
+                    You can edit the content of the description just like you would in Microsoft Office Word / any other word processing software.
+                  </p>
+
+                  <p>
+                    We await your request(s)
+                  </p>
+                  <!-- <ul class="list-inline">
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="bi bi-facebook" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="bi bi-twitter" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="bi bi-instagram" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul> -->
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section><!-- End Blog Grid-->
+    </div>
+    <!-- End Blog Grid-->
 
   </main><!-- End #main -->
 

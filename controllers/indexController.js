@@ -1,4 +1,9 @@
-const   nodemailer              = require("nodemailer");
+const   nodemailer              = require("nodemailer"),
+        Agents                  = require("../models/user"),
+        passport                = require("passport");
+
+// CONFIG
+require("../config/login")(passport);
 
 require("dotenv").config();
 // NODEMAILER CONFIGURATION
@@ -89,4 +94,19 @@ exports.contactPageLogic = (req, res) => {
             console.log(err);
         }
     });
+}
+
+// LOGIN PAGE
+exports.login = (req, res) => {
+    res.render("login", {
+        title : "OseRent SL Agent Login Page"
+    });
+}
+
+// LOGIN LOGIC
+exports.loginLogic = (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect : "/agent",
+        failureRedirect : "/login"
+    })(req, res, next);
 }
