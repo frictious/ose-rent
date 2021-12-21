@@ -15,6 +15,9 @@ router.get("/houses", indexController.houses);
 // REQUESTS ROUTE
 router.get("/requests", indexController.requests);
 
+// SEND REQUEST
+router.post("/requests", indexController.requestLogic);
+
 // AGENTS ROUTE
 router.get("/agents", indexController.agents);
 

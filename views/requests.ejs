@@ -31,7 +31,7 @@
     <div class="col-sm-12  container">
       <div class="row">
         <div class="col-md-7">
-          <form action="/customersrequest" method="POST">
+          <form action="/requests" method="POST">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <div class="form-group">
@@ -40,13 +40,13 @@
               </div>
               <div class="col-md-6 mb-3">
                 <div class="form-group">
-                  <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" required>
+                  <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" required>
                 </div>
               </div>
               <div class="col-md-12 mb-3">
                 <div class="form-group form-group-lg">
                   <!-- <label class="pb-2" for="Type">Type</label> -->
-                  <select class="form-control form-select form-control-lg" id="Type">
+                  <select class="form-control form-select form-control-lg form-control-a" id="Type" name="type">
                     <option disabled selected>All Type</option>
                     <option value="Rent">Rent</option>
                     <option value="Sell">Sell</option>
@@ -62,21 +62,14 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <textarea name="description" class="form-control" id="request" cols="45" rows="15" placeholder="House Description" required></textarea>
+                  <textarea name="description" class="form-control form-control-a" id="request" cols="45" rows="15" placeholder="House Description"></textarea>
                 </div>
               </div>
               <br>
               <div class="divider"></div>
-              <!-- <div class="col-md-12 my-3">
-                <div class="mb-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-              </div> -->
-
-              <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-a">Make Request</button>
+              
+              <div class="col-md-12 text-center mt-3">
+                <button type="submit" class="btn btn-lg btn-primary">Make Request</button>
               </div>
             </div>
           </form>

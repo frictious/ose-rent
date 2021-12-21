@@ -1,6 +1,7 @@
 const   mongoose                    = require("mongoose");
 
 const houseSchema = mongoose.Schema({
+    duration : String,
     address : String,
     description : String,
     price : String,
@@ -8,14 +9,11 @@ const houseSchema = mongoose.Schema({
     front : String,
     back : String,
     inside : String,
+    outside : String,
     agent : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "Users"
-    },
-    firstFeature : String, // Features of the house (self contain, compound, fenced, water)
-    secondFeature : String,
-    thirdFeature : String,
-    fourthFeature : String
+    }
 });
 
 module.exports = mongoose.model("Houses", houseSchema);

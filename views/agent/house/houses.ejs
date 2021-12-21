@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Houses</h4>
+                            <a href="/agent/addhouse" class="btn btn-sm btn-primary">Add House</a>
+                            <!-- <span class="ml-1">Houses</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <% houses.forEach((house) => { %>
+                        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-4">
+                            <div class="card mb-3">
+                                <img class="card-img-top img-fluid" src="/agent/files/<%-house.front%>" alt="Front of house">
+                                <div class="card-header">
+                                    <h5 class="card-title"><%- house.address %></h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><%- house.description.substring(0, 40) %>...</p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- <p class="card-text d-inline">Card footer</p> -->
+                                    <a href="javascript:void()" class="card-link float-right btn btn-primary">Read More...</a>
+                                </div>
+                            </div>
+                        </div>                    
+                    <% }); %>
+                
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+<%- include('../partials/footer') %>

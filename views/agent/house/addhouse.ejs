@@ -1,0 +1,129 @@
+<%- include('../partials/header') %>
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Add House</h4>
+                            <!-- <span class="ml-1">Element</span> -->
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Element</a></li>
+                        </ol>
+                    </div> -->
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-6 col-xxl-12">
+
+                        <div class="card">
+                            <!-- <div class="card-header">
+                                <h4 class="card-title">Horizontal Form</h4>
+                            </div> -->
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="POST" action="/agent/house/add" enctype="multipart/form-data">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" placeholder="12 Sani Abacha St" name="address">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Price</label>
+                                                <input type="String" class="form-control" placeholder="Price" name="price">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Type</label>
+                                                <select id="inputState" class="form-control" name="type">
+                                                    <option selected disabled>Choose House Type</option>
+                                                    <option value="Rent">Rent</option>
+                                                    <option value="Lease">Lease</option>
+                                                    <option value="Sale">Sale</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Duration</label>
+                                                <select id="inputState" class="form-control" name="duration">
+                                                    <option selected disabled>Choose Duration</option>
+                                                    <option value="1 Year">1 Year</option>
+                                                    <option value="2 Years">2 Years</option>
+                                                    <option value="3 Years">3 Years</option>
+                                                </select>
+                                            </div>  
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Front Picture</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="front">
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                            </div>  
+                                            <div class="form-group col-md-6">
+                                                <label>Back Picture</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="back">
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Inside Picture</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="inside">
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Outside Picture</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="outside">
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group col-md-6">
+                                                <label>Inside</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="inside">
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                            </div>     -->
+                                        </div>
+                                        <div class="card">
+                                            <label>House Description</label>
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="4" cols="200" id="comment" placeholder="House Description" name="description"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label">
+                                                    Check me out
+                                                </label>
+                                            </div>
+                                        </div> -->
+                                        <button type="submit" class="btn btn-primary">Add House</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+<%- include('../partials/footer') %>

@@ -1,9 +1,6 @@
 const   nodemailer              = require("nodemailer"),
-        Agents                  = require("../models/user"),
-        passport                = require("passport");
-
-// CONFIG
-require("../config/login")(passport);
+        Request                 = require("../models/request"),
+        os                      = require("os");
 
 require("dotenv").config();
 // NODEMAILER CONFIGURATION
@@ -41,6 +38,29 @@ exports.houses = (req, res) => {
 exports.requests = (req, res) => {
     res.render("requests", {
         title : "OseRent SL Customers Requests"
+    });
+}
+
+// REQUEST LOGIC
+exports.requestLogic = (req, res) => {
+    Request.create({
+        name : req.body.name,
+        email : req.body.email,
+        phone : req.body.phone,
+        type : req.body.type, //Whether lease, rent, or buy
+        description : req.body.description
+    })
+    .then(request => {
+        if(request){
+            console.log("REQUEST MADE SUCCESSFULLY");
+            res.redirect("back");
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
     });
 }
 
@@ -94,19 +114,4 @@ exports.contactPageLogic = (req, res) => {
             console.log(err);
         }
     });
-}
-
-// LOGIN PAGE
-exports.login = (req, res) => {
-    res.render("login", {
-        title : "OseRent SL Agent Login Page"
-    });
-}
-
-// LOGIN LOGIC
-exports.loginLogic = (req, res, next) => {
-    passport.authenticate("local", {
-        successRedirect : "/agent",
-        failureRedirect : "/login"
-    })(req, res, next);
 }
