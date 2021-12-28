@@ -29,7 +29,11 @@
                                 </div>
                                 <div class="card-footer">
                                     <!-- <p class="card-text d-inline">Card footer</p> -->
-                                    <a href="javascript:void()" class="card-link float-right btn btn-primary">Read More...</a>
+                                    <a href="/agent/house/<%- house._id %>" class="card-link float-left btn btn-primary">Read More...</a>
+
+                                    <form action="/agent/house/<%- house._id %>?_method=DELETE" class="float-right">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>                    

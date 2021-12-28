@@ -1,60 +1,30 @@
 const   House                   = require("../../models/house"),
-        Agents                  = require("../../models/user"),
+        Agent                  = require("../../models/user"),
         Request                 = require("../../models/request"),
         passport                = require("passport"),
         mongoose                = require("mongoose"),
+        bcrypt                  = require("bcryptjs"),
         crypto                  = require("crypto"),
         path                    = require("path"),
         multer                  = require("multer"),
         {GridFsStorage}         = require("multer-gridfs-storage"),
-        Grid                    = require("gridfs-stream");
+        Grid                    = require("gridfs-stream"),
+        nodemailer              = require("nodemailer");
 
 // CONFIG
 require("../../config/login")(passport);
 
 require("dotenv").config();
 
-//GRIDFS File db connection
-const URI = process.env.MONGOOSE;
-const conn = mongoose.createConnection(URI, {
-    useNewUrlParser : true,
-    useUnifiedTopology : true
-});
-
-//GRIDFS CONFIG FOR IMAGES
-let gfs;
-conn.once('open', () => {
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection("files");
-});
-
-//GRIDFS STORAGE CONFIG
-const storage = new GridFsStorage({
-    url: URI,
-    options : {useUnifiedTopology : true},
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-            if (err) {
-                return reject(err);
-            }
-            const filename = buf.toString('hex') + path.extname(file.originalname);
-            const fileInfo = {
-                filename: filename,
-                bucketName: "files"
-            };
-            resolve(fileInfo);
-            });
-        });
+// NODEMAILER CONFIG
+const transport = nodemailer.createTransport({
+    service : "gmail",
+    auth : {
+        type : "login",
+        user : process.env.EMAIL,
+        pass : process.env.PASSWORD
     }
 });
-
-//Multer config for images
-const files = multer({ storage });
-
-//Uploading multiple house images
-const cpUpload = files.fields([{ name: 'front', maxCount: 1 }, { name: 'back', maxCount: 1 },
-{name : 'inside', maxCount : 1}, {name : 'outside', maxCount : 1}]);
 
 
 // AGENT ROOT ROUTE
@@ -66,7 +36,7 @@ exports.index = (req, res) => {
 
 // LOGIN PAGE
 exports.login = (req, res) => {
-    res.render("login", {
+    res.render("/agent/login", {
         title : "OseRent SL Agent Login Page"
     });
 }
@@ -75,7 +45,7 @@ exports.login = (req, res) => {
 exports.loginLogic = (req, res, next) => {
     passport.authenticate("local", {
         successRedirect : "/agent",
-        failureRedirect : "/login"
+        failureRedirect : "/agent/login"
     })(req, res, next);
 }
 
@@ -83,6 +53,57 @@ exports.loginLogic = (req, res, next) => {
 exports.logout = (req, res) => {
     req.logout();
     res.redirect("back");
+}
+
+// SET PASSWORD FORM
+exports.setpassword = (req, res) => {
+    Agent.findById({_id : req.params.id})
+    .then(agent => {
+        if(agent){
+            res.render("agent/setpassword", {
+                title : "OseRent SL Agent Set Password and Profile Picture area",
+                agent : agent
+            });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    });
+}
+
+// SET PASSWORD LOGIC
+exports.setpasswordLogic = (req, res) => {
+    if(req.body.password === req.body.repassword) {
+        bcrypt.genSalt(10)
+        .then(salt => {
+            bcrypt.hash(req.body.password, salt)
+            .then(hash => {
+                if(req.file.mimetype === "image/jpg" || req.file.mimetype === "image/png" || req.file.mimetype === "image/jpeg"){
+                    Agent.findByIdAndUpdate({_id : req.params.id}, {
+                        password : hash,
+                        status : "Activated",
+                        picture : req.file.filename,
+                        pictureName : req.file.originalname
+                    })
+                    .then(agent => {
+                        if(agent){
+                            console.log("AGENT PASSWORD AND PICTURE ADDED SUCCESSFULLY");
+                            res.redirect("/agent/login");
+                        }
+                    })   
+                }     
+            })
+        })
+        .catch(err => {
+            if(err){
+                console.log(err);
+                res.redirect("back");
+            }
+        });
+    }
 }
 
 // HOUSES
@@ -143,9 +164,9 @@ exports.getHouse = (req, res) => {
     House.findById({_id : req.params.id})
     .then(house => {
         if(house){
-            res.render("agent/house", {
+            res.render("agent/house/viewhouse", {
                 title : "Single House",
-                house : hosue
+                house : house
             });
         }
     })
@@ -162,8 +183,9 @@ exports.updateHouse = (req, res) => {
     House.findById({_id : req.params.id})
     .then(house => {
         if(house){
-            res.render("agent/updateHouse", {
-                title : "OseRent SL Agent House Update"
+            res.render("agent/house/updatehouse", {
+                title : "OseRent SL Agent House Update",
+                house : house
             });
         }
     })
@@ -180,7 +202,6 @@ exports.updateHouseLogic = (req, res) => {
     House.findByIdAndUpdate({_id : req.params.id}, req.body)
     .then(house => {
         if(house){
-            console.log(req.body);
             console.log("HOUSE INFORMATION UPDATED SUCCESSFULLY");
             res.redirect(`/agent/house/${house._id}`);
         }
@@ -227,6 +248,54 @@ exports.requests = (req, res) => {
             res.redirect("back");
         }
     });
+}
+
+// VIEW REQUEST
+exports.viewrequest = (req, res) => {
+    Request.findById({_id : req.params.id})
+    .then(customer => {
+        if(customer){
+            res.render("agent/viewrequest", {
+                title : "OseRent SL Customers Request",
+                customer: customer
+            });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    });
+}
+
+// CONTACT CUSTOMER
+exports.contactcustomer = (req, res) => {
+    Request.findById({_id : req.params.id})
+    .then(customer => {
+       if(customer){
+           const mailOptions = {
+               from: process.env.EMAIL,
+               to: customer.email,
+               subject : `RE: Request for ${customer.type}`,
+               html: `${req.body.message}<p>From ${req.user.name} </p>`
+           }
+       
+           //Sending mail
+           transport.sendMail(mailOptions, (err, mail) => {
+               if(!err){
+                    console.log("MAIL SENT TO CUSTOMER");
+                    res.redirect("back");
+               }
+           });
+       } 
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    })
 }
 
 //Getting the files

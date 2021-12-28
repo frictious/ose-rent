@@ -58,17 +58,41 @@ const cpUpload = files.fields([{ name: 'front', maxCount: 1 }, { name: 'back', m
 // ROOT ROUTE
 router.get("/", agentController.index);
 
+// SET PASSWORD
+router.get("/setpassword/:id", agentController.setpassword);
+
+// SET PASSWORD LOGIC
+router.put("/setpassword/:id", files.single("picture"), agentController.setpasswordLogic);
+
 // HOUSES
 router.get("/houses", agentController.houses);
 
 // ADD HOUSE FORM
 router.get("/house/add", agentController.addHouse);
 
+// VIEW HOUSE
+router.get("/house/:id", agentController.getHouse);
+
 // ADD HOUSE LOGIC
 router.post("/house/add", cpUpload, agentController.addHouseLogic);
 
+// UPDATE HOUSE
+router.get("/house/:id/edit", agentController.updateHouse);
+
+// UPDATE HOUSE LOGIC
+router.put("/house/:id", agentController.updateHouseLogic);
+
+// DELETE HOUSE
+router.delete("/house/:id", agentController.deleteHouse);
+
 // REQUESTS
 router.get("/requests", agentController.requests);
+
+// VIEW REQUEST
+router.get("/request/:id", agentController.viewrequest);
+
+// SEND MESSAGE TO CUSTOMER
+router.get("/customer/:id", agentController.contactcustomer);
 
 // GET FILES
 router.get("/files/:filename", agentController.files);

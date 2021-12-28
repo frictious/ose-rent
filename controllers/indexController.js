@@ -1,6 +1,8 @@
 const   nodemailer              = require("nodemailer"),
         Request                 = require("../models/request"),
-        os                      = require("os");
+        os                      = require("os"),
+        Agent                   = require("../models/user"),
+        House                   = require("../models/house");
 
 require("dotenv").config();
 // NODEMAILER CONFIGURATION
@@ -29,8 +31,45 @@ exports.about = (req, res) => {
 
 // HOUSES PAGE
 exports.houses = (req, res) => {
-    res.render("houses", {
-        title : "OseRent SL Houses"
+    House.find({})
+    .then(houses => {
+        if(houses){
+            res.render("houses", {
+                title : "OseRent SL Houses",
+                houses : houses
+            });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    });
+}
+
+// VIEW HOUSE PAGE
+exports.house = (req, res) => {
+    House.findById({_id : req.params.id})
+    .then(house => {
+        if(house){
+            Agent.findById({_id : house.agent.id})
+            .then(agent => {
+                if(agent){
+                    res.render("singlehouse", {
+                        title : "OseRent SL House Information",
+                        house : house,
+                        agent : agent
+                    });
+                }
+            })
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
     });
 }
 
@@ -68,6 +107,25 @@ exports.requestLogic = (req, res) => {
 exports.agents = (req, res) => {
     res.render("agents", {
         title : "OseRent SL Agents"
+    });
+}
+
+// VIEW AGENT INFORMATION
+exports.viewagent = (req, res) => {
+    Agent.findById({_id : req.params.id})
+    .then(agent => {
+        if(agent){
+            res.render("singleagent", {
+                title : "OseRent SL Agent",
+                agent : agent
+            });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
     });
 }
 

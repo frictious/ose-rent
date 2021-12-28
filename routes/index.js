@@ -21,6 +21,9 @@ router.post("/requests", indexController.requestLogic);
 // AGENTS ROUTE
 router.get("/agents", indexController.agents);
 
+// SINGLE AGENT
+router.get("/agents/:id", indexController.viewagent);
+
 // CONTACT ROUTE
 router.get("/contact", indexController.contact);
 
