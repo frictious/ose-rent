@@ -31,12 +31,12 @@
                                     <!-- <p class="card-text d-inline">Card footer</p> -->
                                     <a href="/agent/house/<%- house._id %>" class="card-link float-left btn btn-primary">Read More...</a>
 
-                                    <form action="/agent/house/<%- house._id %>?_method=DELETE" class="float-right">
+                                    <form action="/agent/house/<%- house._id %>?_method=DELETE" class="float-right" method="POST">
                                         <button class="btn btn-danger">Delete</button>
                                     </form>
                                 </div>
                             </div>
-                        </div>                    
+                        </div>
                     <% }); %>
                 
                 </div>

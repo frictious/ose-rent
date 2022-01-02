@@ -12,6 +12,12 @@ router.get("/about", indexController.about);
 // HOUSES ROUTE
 router.get("/houses", indexController.houses);
 
+// VIEW HOUSE INFORMATION
+router.get("/house/:id", indexController.house);
+
+// CONTACT AGENT
+router.post("/contactagent/:id", indexController.contactAgent);
+
 // REQUESTS ROUTE
 router.get("/requests", indexController.requests);
 

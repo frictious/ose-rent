@@ -11,11 +11,17 @@
                         <div class="card">
                             <div class="stat-widget-two card-body">
                                 <div class="stat-content">
-                                    <div class="stat-text">Houses</div>
-                                    <div class="stat-digit">8</div>
+                                    <div class="stat-text">Your Houses</div>
+                                    <% count = 0; %>
+                                    <% houses.forEach((house) => { %>
+                                        <% if(house.agent === user._id) { %>
+                                            <% count += 1; %>
+                                        <% } %>    
+                                    <% }); %>
+                                    <div class="stat-digit"><%- count %></div>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success w-<%- count %>" role="progressbar" aria-valuenow="<%- count %>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
@@ -25,10 +31,14 @@
                             <div class="stat-widget-two card-body">
                                 <div class="stat-content">
                                     <div class="stat-text">Requests</div>
-                                    <div class="stat-digit">7</div>
+                                    <% requestcount = 0; %>
+                                    <% requests.forEach((request) => { %>
+                                        <% requestcount += 1; %>
+                                    <% }); %>
+                                    <div class="stat-digit"><%- requestcount %></div>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-primary w-<%- requestcount %>" role="progressbar" aria-valuenow="<%- requestcount %>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>

@@ -38,10 +38,10 @@
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
                 <div class="carousel-item-b swiper-slide">
-                  <img src="/agent/files/<%- house.front %>" alt="House Front Image" width="100%">
+                  <img src="/agent/files/<%- house.front %>" alt="House Front Image" width="100%" height="1000px">
                 </div>
                 <div class="carousel-item-b swiper-slide">
-                  <img src="/agent/files/<%- house.back %>" alt="House Back Image" width="100%">
+                  <img src="/agent/files/<%- house.back %>" alt="House Back Image" width="100%" height="1000px">
                 </div>
               </div>
             </div>
@@ -57,10 +57,10 @@
                 <div class="property-price d-flex justify-content-center foo">
                   <div class="card-header-c d-flex">
                     <div class="card-box-ico">
-                      <span class="bi bi-cash">Le </span>
+                      <span class="">Le <%- house.price %> <%- house.duration %></span>
                     </div>
                     <div class="card-title-c align-self-center">
-                      <h5 class="title-c"><%- house.price %></h5>
+                      <h5 class="title-c"></h5>
                     </div>
                   </div>
                 </div>
@@ -163,20 +163,18 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <img src="/images/agent-4.jpg" alt="" class="img-fluid">
+                <img src="/agent/files/<%- agent.picture %>" alt="<%- agent.picturename %>" class="img-fluid">
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">
-                  <h4 class="title-agent">Anabella Geller</h4>
+                  <h4 class="title-agent"><%- agent.name %></h4>
                   <p class="color-text-a">
-                    Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                    dui. Quisque velit nisi,
-                    pretium ut lacinia in, elementum id enim.
+                    Best Agent with the highest rate of house sales in the country. You will no doubt get the best and most affordable deal with him.
                   </p>
                   <ul class="list-unstyled">
                     <li class="d-flex justify-content-between">
                       <strong>Phone:</strong>
-                      <span class="color-text-a">(222) 4568932</span>
+                      <span class="color-text-a"><%- agent.contact %></span>
                     </li>
                     <!-- <li class="d-flex justify-content-between">
                       <strong>Mobile:</strong>
@@ -184,7 +182,7 @@
                     </li> -->
                     <li class="d-flex justify-content-between">
                       <strong>Email:</strong>
-                      <span class="color-text-a">annabella@example.com</span>
+                      <span class="color-text-a"><%- agent.email %></span>
                     </li>
                     <!-- <li class="d-flex justify-content-between">
                       <strong>Skype:</strong>
@@ -219,16 +217,21 @@
               </div>
               <div class="col-md-12 col-lg-4">
                 <div class="property-contact">
-                  <form class="form-a">
+                  <form class="form-a" action="/contactagent/<%- house._id %>" method="POST">
                     <div class="row">
                       <div class="col-md-12 mb-1">
                         <div class="form-group">
-                          <input type="text" class="form-control form-control-lg form-control-a" id="inputName" placeholder="Name *" required>
+                          <input type="text" class="form-control form-control-lg form-control-a" id="inputName" placeholder="Name *" name="name" required>
                         </div>
                       </div>
                       <div class="col-md-12 mb-1">
                         <div class="form-group">
-                          <input type="email" class="form-control form-control-lg form-control-a" id="inputEmail1" placeholder="Email *" required>
+                          <input type="email" class="form-control form-control-lg form-control-a" id="inputEmail1" placeholder="Email *" name="email" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12 mb-1">
+                        <div class="form-group">
+                          <input type="text" class="form-control form-control-lg form-control-a" id="inputContact" placeholder="Phone Number *" name="contact" required>
                         </div>
                       </div>
                       <div class="col-md-12 mb-1">
@@ -237,7 +240,7 @@
                         </div>
                       </div>
                       <div class="col-md-12 mt-3">
-                        <button type="submit" class="btn btn-a">Send Message</button>
+                        <button type="submit" class="btn btn-a">Contact Agent</button>
                       </div>
                     </div>
                   </form>

@@ -19,13 +19,13 @@ router.get("/agent/add", adminController.addagent);
 router.post("/agent/add", adminController.addagentLogic);
 
 // VIEW AGENT INFORMATION
-router.get("agent/:id", adminController.viewagent);
+router.get("/agent/:id", adminController.viewagent);
 
 // UPDATE AGENT STATUS
-router.put("agent/status/:id", adminController.updateAgentStatus);
+router.put("/agent/status/:id", adminController.updateAgentStatus);
 
 // DELETE AGENT INFORMATION
-router.delete("agent/:id", adminController.deleteagent);
+router.delete("/agent/:id", adminController.deleteagent);
 
 // ADMINS
 router.get("/admins", adminController.admins);
@@ -36,11 +36,11 @@ router.get("/add", adminController.addadmin);
 // ADD ADMIN FORM LOGIC
 router.post("/add", adminController.addadminLogic);
 
-// VIEW ADMIN INFORMATION
-router.get("/edit/:id", adminController.editadmin);
+// ADMIN PROFILE
+router.get("/profile/:id", adminController.editadmin);
 
 // UPDATE ADMIN INFORMATION LOGIC
-router.put("/edit/:id", adminController.editAdminLogic);
+router.put("/profile/:id", adminController.editAdminLogic);
 
 // DELETE ADMIN INFORMATION
 router.delete("/:id", adminController.deleteadmin);
@@ -53,5 +53,8 @@ router.post("/login", adminController.loginLogic);
 
 // LOGOUT
 router.get("/logout", adminController.logout);
+
+// DELETE REQUEST
+router.delete("/request/:id", adminController.deleterequest);
 
 module.exports = router;

@@ -53,13 +53,72 @@ exports.house = (req, res) => {
     House.findById({_id : req.params.id})
     .then(house => {
         if(house){
-            Agent.findById({_id : house.agent.id})
+            Agent.findById({_id : house.agent})
             .then(agent => {
                 if(agent){
                     res.render("singlehouse", {
                         title : "OseRent SL House Information",
                         house : house,
                         agent : agent
+                    });
+                }
+            })
+            // res.render("singlehouse", {
+            //     title : "OseRent SL House Information",
+            //     house : house,
+            // });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    });
+}
+
+// CONTACT HOUSE AGENT
+exports.contactAgent = (req, res) => {
+    House.findById({_id : req.params.id})
+    .then(house => {
+        if(house){
+            Agent.findById({_id : house.agent})
+            .then(agent => {
+                if(agent){
+                    const mailOptions = {
+                        from : process.env.EMAIL,
+                        to : agent.email,
+                        subject : "OseRent SL: Customer is interested in your house",
+                        html : `<p>Dear ${agent.name}, </p> 
+                        <p>A customer reached out for one of your listed houses with the address <strong>${house.address}</strong>.</p>
+                        <p>The customers message is: </p>
+
+                        <p>
+                            <strong>
+                            ${req.body.message}
+                            </strong>
+                        </p>
+                        
+                        <p>Please respond as quickly as possible</p>
+
+                        <p>The customers details are:</p>
+                        <ol>
+                            <li>${req.body.name}</li>
+                            <li>${req.body.email}</li>
+                            <li>${req.body.contact}</li>
+                        </ol>
+
+                        <p>Regards</p>
+
+                        <p>OseRent SL Management</p>
+                        `
+                    }
+
+                    transport.sendMail(mailOptions, (err, mail) => {
+                        if(!err){
+                            console.log("EMAIL SENT TO AGENT SUCCESSFULLY");
+                            res.redirect(`/house/${house._id}`);
+                        }
                     });
                 }
             })
@@ -105,8 +164,20 @@ exports.requestLogic = (req, res) => {
 
 // AGENTS PAGE
 exports.agents = (req, res) => {
-    res.render("agents", {
-        title : "OseRent SL Agents"
+    Agent.find({})
+    .then(agents => {
+        if(agents){
+            res.render("agents", {
+                title : "OseRent SL Agents",
+                agents : agents
+            });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
     });
 }
 

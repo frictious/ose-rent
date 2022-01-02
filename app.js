@@ -3,7 +3,9 @@ const   express                 = require("express"),
         Admin                   = require("./routes/admin"),
         Agent                   = require("./routes/agent"),
         mongoose                = require("mongoose"),
-        methodoverride          = require("method-override");
+        methodoverride          = require("method-override"),
+        passport                = require("passport"),
+        session                 = require("express-session");
 
 require("dotenv").config();
 const app = express();
@@ -20,6 +22,20 @@ mongoose.connect(process.env.MONGODB, {
     useUnifiedTopology : true,
     useNewUrlParser : true,
     useFindAndModify : false
+});
+
+app.use(session({
+    secret : "OseRent SL Session",
+    resave: false,
+    saveUninitialized: false,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
 });
 
 // ROUTES

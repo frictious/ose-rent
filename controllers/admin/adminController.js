@@ -45,7 +45,7 @@ exports.admins = (req, res) => {
 
 // ADD ADMIN FORM
 exports.addadmin = (req, res) => {
-    res.render("admin/addadmin", {
+    res.render("admin/register", {
         title : "OseRent SL Admin Registration"
     });
 }
@@ -57,17 +57,19 @@ exports.addadminLogic = (req, res) => {
         .then(salt => {
             bcrypt.hash(req.body.password, salt)
             .then(hash => {
-                if(req.file.mimetype === "image/jpg" || req.file.mimetype === "image/png" || req.file.mimetype === "image/jpeg"){
-                    Admin.create({
-                        name : req.body.name,
-                        contact : req.body.contact,
-                        email : req.body.email,
-                        password : hash,
-                        picture : req.file.filename,
-                        pictureName : req.file.originalname,
-                        role : "Admin"
-                    })
-                }
+                Admin.create({
+                    name : req.body.name,
+                    contact : req.body.contact,
+                    email : req.body.email,
+                    password : hash,
+                    role : "Admin"
+                })
+                .then(admin => {
+                    if(admin){
+                        console.log("ADMIN ACCOUNT CREATED SUCCESSFULLY");
+                        res.redirect("back");
+                    }
+                })
             })
         })
         .catch(err => {
@@ -79,13 +81,13 @@ exports.addadminLogic = (req, res) => {
     }
 }
 
-// VIEW ADMIN INFORMATION FORM
+// ADMIN PROFILE
 exports.editadmin = (req, res) => {
     Admin.findById({_id : req.params.id})
     .then(admin => {
         if(admin){
-            res.render("admin/editadmin", {
-                title : "OseRent SL Admin Information",
+            res.render("admin/profile", {
+                title : "OseRent SL Admin Profile",
                 admin : admin
             });
         }
@@ -134,7 +136,7 @@ exports.deleteadmin = (req, res) => {
 
 // LOGIN PAGE
 exports.login = (req, res) => {
-    res.render("login", {
+    res.render("admin/login", {
         title : "OseRent SL Admin Login Page"
     });
 }
@@ -150,7 +152,7 @@ exports.loginLogic = (req, res, next) => {
 // LOGOUT
 exports.logout = (req, res) => {
     req.logout();
-    res.redirect("back");
+    res.redirect("/admin/login");
 }
 
 // REQUESTS
@@ -162,6 +164,23 @@ exports.requests = (req, res) => {
                 title : "OseRent SL Customers Requests Section",
                 requests : requests
             });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    });
+}
+
+// DELETE REQUEST
+exports.deleterequest = (req, res) => {
+    Request.findByIdAndDelete({_id : req.params.id})
+    .then(request => {
+        if(request){
+            console.log("REQUEST DELETED SUCCESSFULLY");
+            res.redirect("back");
         }
     })
     .catch(err => {

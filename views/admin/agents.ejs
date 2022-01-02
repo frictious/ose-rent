@@ -26,8 +26,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Type</th>
-                                            <th class="text-center" colspan="3">Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -35,8 +34,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Type</th>
-                                            <th class="text-center" colspan="3">Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -44,9 +42,7 @@
                                             <tr>
                                                 <td><%- agent.name %></td>
                                                 <td><%- agent.email %></td>
-                                                <td><%- agent.phone %></td>
-                                                <td><%- agent.type %></td>
-                                                <td class="text-center"><a href="/admin/agent/<%- agent._id %>" class="btn btn-primary">View</a></td>
+                                                <td><%- agent.contact %></td>
                                                 <td class="text-center">
                                                     <% if(agent.status === "Deactivated"){ %>
                                                         <form action="/admin/agent/status/<%- agent._id %>?_method=PUT" method="POST">
@@ -57,12 +53,6 @@
                                                             <button class="btn btn-danger">Deactivate</button>
                                                         </form>
                                                     <% } %>
-                                                </td>
-
-                                                <td>
-                                                    <form action="/admin/agent/<%- agent._id %>?_method=DELETE" method="POST">
-                                                        <button>Activate</button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         <% }); %>
