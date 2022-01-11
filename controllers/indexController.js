@@ -17,8 +17,35 @@ const transport = nodemailer.createTransport({
 
 // HOME PAGE
 exports.index = (req, res) => {
-    res.render("index", {
-        title : "Ose Rent SL"
+    Agent.find({}).limit(3)
+    .then(agents => {
+        if(agents){
+            House.find({})
+            .then(houses => {
+                if(houses){
+                    res.render("index", {
+                        title : "Ose Rent SL",
+                        agents : agents,
+                        houses : houses
+                    });
+                }else{
+                    res.render("index", {
+                        title : "Ose Rent SL",
+                        agents : agents
+                    });
+                }
+            })
+        }else{
+            res.render("index", {
+                title : "Ose Rent SL"
+            });
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
     });
 }
 
