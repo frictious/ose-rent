@@ -1,6 +1,5 @@
 const   nodemailer              = require("nodemailer"),
         Request                 = require("../models/request"),
-        os                      = require("os"),
         Agent                   = require("../models/user"),
         House                   = require("../models/house");
 
