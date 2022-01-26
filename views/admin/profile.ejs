@@ -18,32 +18,32 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Admin Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Update Account Information</h3></div>
                                     <div class="card-body">
-                                        <form action="/admin/add" method="POST">
+                                        <form action="/admin/profile/<%- user._id %>?_method=PUT" method="POST">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="name" type="text" placeholder="Enter Admin Name" name="name" />
+                                                        <input class="form-control" id="name" type="text" value="<%- user.name %>" name="name" />
                                                         <label for="name">Name</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="email" type="email" placeholder="example@example.com" name="email" />
+                                                        <input class="form-control" id="email" type="email" value="<%- user.email %>" name="email" />
                                                         <label for="email">Email</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="contact" type="text" placeholder="Contact" name="contact"/>
+                                                <input class="form-control" id="contact" type="text" value="<%- user.contact %>" name="contact"/>
                                                 <label for="contact">Contact</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="password" type="password" placeholder="Create a password" name="password" />
-                                                        <label for="password">Password</label>
+                                                        <input class="form-control" id="password" type="password" placeholder="Update Password" name="password" />
+                                                        <label for="password">Update Password</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -54,7 +54,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary btn-block" >Create Account</button></div>
+                                                <div class="d-grid"><button class="btn btn-primary btn-block" >Update</button></div>
                                             </div>
                                         </form>
                                     </div>

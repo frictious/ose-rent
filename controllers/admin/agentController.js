@@ -132,7 +132,7 @@ exports.profile = (req, res) => {
 
 // UPDATE PROFILE
 exports.updateProfile = (req, res) => {
-    if(req.body.picture === ""){
+    if(req.body.picture === undefined){
         Agent.findByIdAndUpdate({_id : req.params.id}, {
             name : req.body.name,
             contact : req.body.contact,

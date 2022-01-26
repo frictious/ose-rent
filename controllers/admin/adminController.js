@@ -1,11 +1,16 @@
 const   Request                 = require("../../models/request"),
         Agent                   = require("../../models/user"),
         Admin                   = require("../../models/user"),
+        House                   = require("../../models/house"),
         bcrypt                  = require("bcryptjs"),
+        passport                = require("passport"),
         nodemailer              = require("nodemailer");
 
 // CONFIG
 require("dotenv").config();
+
+// CONFIG
+require("../../config/login")(passport);
 
 // NODEMAILER TRANSPORT
 const transport = nodemailer.createTransport({
@@ -19,9 +24,29 @@ const transport = nodemailer.createTransport({
 
 // ROUTES
 exports.index = (req, res) => {
-    res.render('admin/index', {
-        title: 'OseRent SL Admin Dashboard',
-    });
+    // Agent Count
+    Agent.find({role : "Agent"})
+    .then(agents => {
+        // Request Count
+        Request.find({})
+        .then(requests => {
+            // House Count
+            House.find({})
+            .then(houses => {
+                // Admin Count
+                Admin.find({role : "Admin"})
+                .then(admins => {
+                    res.render('admin/index', {
+                        title: 'OseRent SL Admin Dashboard',
+                        agent : agents.length,
+                        request : requests.length,
+                        house : houses.length,
+                        admin : admins.length
+                    });
+                })
+            })
+        })
+    })
 }
 
 // ADMINS
@@ -102,19 +127,52 @@ exports.editadmin = (req, res) => {
 
 // UPDATE ADMIN INFORMATION LOGIC
 exports.editAdminLogic = (req, res) => {
-    Admin.findByIdAndUpdate({_id : req.params.id}, req.body)
-    .then(admin => {
-        if(admin){
-            console.log("ADMIN INFORMATION UPDATED SUCCESSFULLY");
-            res.redirect("back");
-        }
-    })
-    .catch(err => {
-        if(err){
-            console.log(err);
-            res.redirect("back");
-        }
-    });
+    if(req.body.password !== "" && (req.body.password === req.body.repassword)){
+        bcrypt.genSalt(10)
+        .then(salt => {
+            bcrypt.hash(req.body.password, salt)
+            .then(hash => {
+                Admin.findByIdAndUpdate({_id : req.params.id}, {
+                    name : req.body.name,
+                    contact : req.body.contact,
+                    email : req.body.email,
+                    password : hash,
+                    role : "Admin"
+                })
+                .then(admin => {
+                    if(admin){
+                        console.log("ADMIN INFORMATION UPDATED SUCCESSFULLY");
+                        res.redirect("/admin");
+                    }
+                })
+            })
+        })
+        .catch(err => {
+            if(err){
+                console.log(err);
+                res.redirect("back");
+            }
+        });
+    }else{
+        Admin.findByIdAndUpdate({_id : req.params.id}, {
+            name : req.body.name,
+            contact : req.body.contact,
+            email : req.body.email,
+            role : "Admin"
+        })
+        .then(admin => {
+            if(admin){
+                console.log("ADMIN INFORMATION UPDATED SUCCESSFULLY");
+                res.redirect("/admin");
+            }
+        })
+        .catch(err => {
+            if(err){
+                console.log(err);
+                res.redirect("back");
+            }
+        });
+    }
 }
 
 // DELETE ADMIN INFORMATION
@@ -193,7 +251,7 @@ exports.deleterequest = (req, res) => {
 
 // AGENTS
 exports.agents = (req, res) => {
-    Agent.find({})
+    Agent.find({role : "Agent"})
     .then(agents => {
         if(agents){
             res.render("admin/agents", {

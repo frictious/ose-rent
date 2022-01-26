@@ -3,23 +3,36 @@ const   express                 = require("express"),
 
 const router = express.Router();
 
+//Login checker
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        if(req.user.role === "Admin"){
+            return next();
+        }else{
+            res.redirect("/admin/logout");
+        }
+    }else{
+        res.redirect("/admin/login");
+    }
+};
+
 // ROUTES
-router.get("/", adminController.index);
+router.get("/", isLoggedIn, adminController.index);
 
 // REQUESTS
-router.get("/requests", adminController.requests);
+router.get("/requests", isLoggedIn, adminController.requests);
 
 // AGENTS
-router.get("/agents", adminController.agents);
+router.get("/agents", isLoggedIn, adminController.agents);
 
 // GET ADD AGENTS FORM
-router.get("/agent/add", adminController.addagent);
+router.get("/agent/add", isLoggedIn, adminController.addagent);
 
 // ADD AGENTS FORM LOGIC
 router.post("/agent/add", adminController.addagentLogic);
 
 // VIEW AGENT INFORMATION
-router.get("/agent/:id", adminController.viewagent);
+router.get("/agent/:id", isLoggedIn, adminController.viewagent);
 
 // UPDATE AGENT STATUS
 router.put("/agent/status/:id", adminController.updateAgentStatus);
@@ -28,16 +41,16 @@ router.put("/agent/status/:id", adminController.updateAgentStatus);
 router.delete("/agent/:id", adminController.deleteagent);
 
 // ADMINS
-router.get("/admins", adminController.admins);
+router.get("/admins", isLoggedIn, adminController.admins);
 
 // ADD ADMIN FORM
-router.get("/add", adminController.addadmin);
+router.get("/add", isLoggedIn, adminController.addadmin);
 
 // ADD ADMIN FORM LOGIC
 router.post("/add", adminController.addadminLogic);
 
 // ADMIN PROFILE
-router.get("/profile/:id", adminController.editadmin);
+router.get("/profile/:id", isLoggedIn, adminController.editadmin);
 
 // UPDATE ADMIN INFORMATION LOGIC
 router.put("/profile/:id", adminController.editAdminLogic);
