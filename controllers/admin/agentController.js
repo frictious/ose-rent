@@ -278,7 +278,8 @@ exports.resetpassword = (req, res) => {
     .then(agent => {
         if(agent){
             res.render("agent/resetpassword", {
-                title : "OseRent SL Agent Password Reset Form"
+                title : "OseRent SL Agent Password Reset Form",
+                agent : agent
             });
         }
     })

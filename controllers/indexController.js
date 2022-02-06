@@ -142,8 +142,18 @@ exports.contactAgent = (req, res) => {
 
                     transport.sendMail(mailOptions, (err, mail) => {
                         if(!err){
-                            console.log("EMAIL SENT TO AGENT SUCCESSFULLY");
-                            res.redirect(`/house/${house._id}`);
+                            House.findByIdAndUpdate({_id: req.params.id}, {status : "Booked"})
+                            .then(bookedHouse => {
+                                if(bookedHouse){
+                                    console.log("HOUSE HAS BEEN BOOKED");
+                                    console.log("EMAIL SENT TO AGENT SUCCESSFULLY");
+                                    res.redirect(`/house/${house._id}`);
+                                }
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.redirect("back");
+                            })
                         }
                     });
                 }

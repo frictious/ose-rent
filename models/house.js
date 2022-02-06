@@ -13,7 +13,8 @@ const houseSchema = mongoose.Schema({
     agent : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "Users"
-    }
+    },
+    status : String // Check if a house in free, paid for, or under negotiation
 });
 
 module.exports = mongoose.model("Houses", houseSchema);
