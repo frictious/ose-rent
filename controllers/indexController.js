@@ -142,10 +142,10 @@ exports.contactAgent = (req, res) => {
 
                     transport.sendMail(mailOptions, (err, mail) => {
                         if(!err){
-                            House.findByIdAndUpdate({_id: req.params.id}, {status : "Booked"})
+                            House.findByIdAndUpdate({_id: req.params.id}, {status : "Negotiating"})
                             .then(bookedHouse => {
                                 if(bookedHouse){
-                                    console.log("HOUSE HAS BEEN BOOKED");
+                                    console.log("HOUSE IS UNDER NEGOTIATION");
                                     console.log("EMAIL SENT TO AGENT SUCCESSFULLY");
                                     res.redirect(`/house/${house._id}`);
                                 }
