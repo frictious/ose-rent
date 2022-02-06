@@ -87,6 +87,9 @@
                                         <p>
                                             <% if(house.status === "Negotiating") { %>
                                                 <strong>House is Under Negotiations</strong>
+                                                <form action="/agent/endnegotiation/<%- house._id %>?_method=PUT" method="POST">
+                                                    <button class="btn btn-danger">END NEGOTIATION</button>
+                                                </form>
                                             <% } %>
                                         </p>
                                     </div>

@@ -136,4 +136,7 @@ router.post("/forgotpassword", agentController.forgotpasswordLogic);
 // GET FILES
 router.get("/files/:filename", agentController.files);
 
+// END NEGOTIATION
+router.put("/endnegotiation/:id", agentController.endnegotiation);
+
 module.exports = router;

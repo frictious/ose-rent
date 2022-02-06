@@ -533,3 +533,20 @@ exports.files = (req, res) => {
         }
     });
 }
+
+// END NEGOTIATION
+exports.endnegotiation = (req, res) => {
+    House.findByIdAndUpdate({_id : req.params.id}, {status : null})
+    .then(endNegotiation => {
+        if(endNegotiation){
+            console.log("NEGOTIATION ENDED");
+            res.redirect("back");
+        }
+    })
+    .catch(err => {
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        }
+    });
+}
